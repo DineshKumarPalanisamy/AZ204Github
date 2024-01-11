@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using SQLApp.Models;
 using SQLApp.Services;
 
@@ -7,12 +6,17 @@ namespace SQLApp.Pages
 {
     public class IndexModel : PageModel
     {
-        public List<Product> Products = new List<Product>();
+        private readonly ProductService _productService;
+
+        public IndexModel(ProductService productService)
+        {
+            _productService = productService;
+        }
+
+        public List<Product> Products = new();
         public void OnGet()
         {
-            ProductService productsService = new ProductService();
-
-            Products = productsService.GetProducts();
+            Products = _productService.GetProducts();
         }
     }
 }

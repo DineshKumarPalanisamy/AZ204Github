@@ -6,21 +6,16 @@ namespace SQLApp.Services
     public class ProductService
     {
 
-        private readonly string _dbSource = "appserverdinessns.database.windows.net";
-        private readonly string _dbUser = "dinessns";
-        private readonly string _dbPassword = "snsDinesh@007";
-        private readonly string _dbName = "appdb";
+        private readonly IConfiguration _configuration;
 
-        private SqlConnection GetConnection()
+        public ProductService(IConfiguration configuration)
         {
-            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
+            _configuration = configuration;
+        }
 
-            sqlConnectionStringBuilder.DataSource = _dbSource;
-            sqlConnectionStringBuilder.UserID = _dbUser;
-            sqlConnectionStringBuilder.Password = _dbPassword;
-            sqlConnectionStringBuilder.InitialCatalog = _dbName;
-
-            return new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+        public SqlConnection GetConnection()
+        {
+            return new SqlConnection(_configuration.GetConnectionString("sqlconnectionstring"));
         }
 
         public List<Product> GetProducts()
