@@ -4,8 +4,12 @@
     ViewData["Title"] = "Home page";
 }
 
+@if (Model.IsBeta)
+{
+    <h1 class="display-4">Azure App config</h1>
+}
 <div class="text-center">
-    <h1 class="display-4">This is a list of Products Github Linked</h1>    
+    <h1 class="display-4">This is a list of Products Github Linked - Version2</h1>    
     <table class="table table-bordered">
         <thead>
         <tr>
